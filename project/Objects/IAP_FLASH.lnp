@@ -1,0 +1,20 @@
+--cpu Cortex-M3
+".\objects\main.o"
+".\objects\stm32f10x_it.o"
+".\objects\core_cm3.o"
+".\objects\system_stm32f10x.o"
+".\objects\startup_stm32f10x_md.o"
+".\objects\misc.o"
+".\objects\stm32f10x_flash.o"
+".\objects\stm32f10x_gpio.o"
+".\objects\stm32f10x_rcc.o"
+".\objects\sys.o"
+".\objects\delay.o"
+".\objects\malloc.o"
+".\objects\stmflash.o"
+".\objects\flash.o"
+".\objects\crc8_16.o"
+--strict --scatter ".\Objects\IAP_FLASH.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\IAP_FLASH.map" -o .\Objects\IAP_FLASH.axf
