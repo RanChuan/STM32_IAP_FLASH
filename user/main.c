@@ -7,7 +7,7 @@
 
 
 
-const char IAP_Version[]="IAP BY FLASH V1.0";
+const char IAP_Version[]="IAP BY FLASH V1.1";
 const char IAP_CompileTime[]=__DATE__ " -- " __TIME__;
 
 
@@ -35,6 +35,17 @@ void jump_app(void);
 
 
 
+//字节数一定要是偶数
+void cmd_flash_read(u8 *buff,u32 addr,u16 length)
+{
+	STMFLASH_Read(0x08000000+addr+1024*120,(u16 *)buff,length/2);
+}
+void cmd_flash_write(u8 *data,u32 addr,u16 length)
+{
+	STMFLASH_Write(0x08000000+addr+1024*120,(u16 *)data,length/2);
+}
+void (*p_Flash_Write)(u8 *data,u32 addr,u16 length);
+void (*p_Flash_Read)(u8 *buff,u32 addr,u16 length);
 
 
 
@@ -46,10 +57,27 @@ int main()
 
 	mem_init();
 	SPI_Flash_Init();
+	
+	
+	if ((SPI_FLASH_TYPE&0xff00)!=0xef00)
+	{
+		p_Flash_Read=cmd_flash_read;
+		p_Flash_Write=cmd_flash_write;
+	}
+	else 
+	{
+		p_Flash_Write=SPI_Flash_Write;
+		p_Flash_Read=SPI_Flash_Read;
+	}
+	
+	
+	
+	
+	
 	if (IAP_CMD==IAP_CMD_FLASH)
 	{
 		IapInfoDef iapinfo={0};
-		SPI_Flash_Read ((u8*)&iapinfo,0,sizeof (iapinfo));
+		p_Flash_Read ((u8*)&iapinfo,0,sizeof (iapinfo));
 		if (iapinfo.appFlashAddr!=0xffffffff)
 		{
 			u8 *databuff=mymalloc (2048);
@@ -59,7 +87,7 @@ int main()
 			u32 laftdatasize=iapinfo.appSize;
 			while (1)
 			{
-				SPI_Flash_Read ((u8*)databuff,flashaddr,datapacksize);
+				p_Flash_Read ((u8*)databuff,flashaddr,datapacksize);
 				flashaddr+=datapacksize;
 				STMFLASH_Write(stm32addr,(u16 *)databuff,datapacksize/2);
 				stm32addr+=datapacksize;
