@@ -62,6 +62,7 @@
 #define IAP_CMD_SDCARD			0xf0000002
 #define IAP_CMD_INTERNET		0xf0000003
 #define IAP_CMD_FLASH				0xf0000004
+#define IAP_CMD_ENTERISP		0xf0000005
 
 
 void NVIC_Configuration(void);

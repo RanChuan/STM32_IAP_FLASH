@@ -8,6 +8,7 @@ Section Cross References
     main.o(i.cmd_flash_write) refers to stmflash.o(i.STMFLASH_Write) for STMFLASH_Write
     main.o(i.jump_app) refers to core_cm3.o(.emb_text) for __set_MSP
     main.o(i.jump_app) refers to main.o(.data) for user_main
+    main.o(i.main) refers to core_cm3.o(.emb_text) for __set_MSP
     main.o(i.main) refers to misc.o(i.NVIC_PriorityGroupConfig) for NVIC_PriorityGroupConfig
     main.o(i.main) refers to malloc.o(i.mem_init) for mem_init
     main.o(i.main) refers to flash.o(i.SPI_Flash_Init) for SPI_Flash_Init
@@ -15,9 +16,9 @@ Section Cross References
     main.o(i.main) refers to malloc.o(i.mymalloc) for mymalloc
     main.o(i.main) refers to stmflash.o(i.STMFLASH_Write) for STMFLASH_Write
     main.o(i.main) refers to main.o(i.jump_app) for jump_app
+    main.o(i.main) refers to main.o(.data) for user_main
     main.o(i.main) refers to flash.o(.data) for SPI_FLASH_TYPE
     main.o(i.main) refers to main.o(i.cmd_flash_read) for cmd_flash_read
-    main.o(i.main) refers to main.o(.data) for p_Flash_Read
     main.o(i.main) refers to main.o(i.cmd_flash_write) for cmd_flash_write
     main.o(i.main) refers to flash.o(i.SPI_Flash_Write) for SPI_Flash_Write
     main.o(i.main) refers to flash.o(i.SPI_Flash_Read) for SPI_Flash_Read
@@ -506,14 +507,14 @@ Image Symbol Table
     i.cmd_flash_write                        0x08000cd2   Section        0  main.o(i.cmd_flash_write)
     i.jump_app                               0x08000cf8   Section        0  main.o(i.jump_app)
     i.main                                   0x08000d30   Section        0  main.o(i.main)
-    i.mem_free                               0x08000e3c   Section        0  malloc.o(i.mem_free)
-    i.mem_init                               0x08000e94   Section        0  malloc.o(i.mem_init)
-    i.mem_malloc                             0x08000f74   Section        0  malloc.o(i.mem_malloc)
-    i.mem_perused                            0x0800100c   Section        0  malloc.o(i.mem_perused)
-    i.myfree                                 0x08001040   Section        0  malloc.o(i.myfree)
-    i.mymalloc                               0x0800105c   Section        0  malloc.o(i.mymalloc)
-    i.mymemset                               0x0800107c   Section        0  malloc.o(i.mymemset)
-    .constdata                               0x08001090   Section       42  main.o(.constdata)
+    i.mem_free                               0x08000e70   Section        0  malloc.o(i.mem_free)
+    i.mem_init                               0x08000ec8   Section        0  malloc.o(i.mem_init)
+    i.mem_malloc                             0x08000fa8   Section        0  malloc.o(i.mem_malloc)
+    i.mem_perused                            0x08001040   Section        0  malloc.o(i.mem_perused)
+    i.myfree                                 0x08001074   Section        0  malloc.o(i.myfree)
+    i.mymalloc                               0x08001090   Section        0  malloc.o(i.mymalloc)
+    i.mymemset                               0x080010b0   Section        0  malloc.o(i.mymemset)
+    .constdata                               0x080010c4   Section       42  main.o(.constdata)
     .data                                    0x20000004   Section       12  main.o(.data)
     .data                                    0x20000010   Section       12  malloc.o(.data)
     .data                                    0x2000001c   Section        2  flash.o(.data)
@@ -716,18 +717,18 @@ Image Symbol Table
     cmd_flash_read                           0x08000cad   Thumb Code    38  main.o(i.cmd_flash_read)
     cmd_flash_write                          0x08000cd3   Thumb Code    38  main.o(i.cmd_flash_write)
     jump_app                                 0x08000cf9   Thumb Code    42  main.o(i.jump_app)
-    main                                     0x08000d31   Thumb Code   230  main.o(i.main)
-    mem_free                                 0x08000e3d   Thumb Code    74  malloc.o(i.mem_free)
-    mem_init                                 0x08000e95   Thumb Code   194  malloc.o(i.mem_init)
-    mem_malloc                               0x08000f75   Thumb Code   138  malloc.o(i.mem_malloc)
-    mem_perused                              0x0800100d   Thumb Code    44  malloc.o(i.mem_perused)
-    myfree                                   0x08001041   Thumb Code    24  malloc.o(i.myfree)
-    mymalloc                                 0x0800105d   Thumb Code    28  malloc.o(i.mymalloc)
-    mymemset                                 0x0800107d   Thumb Code    20  malloc.o(i.mymemset)
-    IAP_Version                              0x08001090   Data          18  main.o(.constdata)
-    IAP_CompileTime                          0x080010a2   Data          24  main.o(.constdata)
-    Region$$Table$$Base                      0x080010bc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080010dc   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x08000d31   Thumb Code   272  main.o(i.main)
+    mem_free                                 0x08000e71   Thumb Code    74  malloc.o(i.mem_free)
+    mem_init                                 0x08000ec9   Thumb Code   194  malloc.o(i.mem_init)
+    mem_malloc                               0x08000fa9   Thumb Code   138  malloc.o(i.mem_malloc)
+    mem_perused                              0x08001041   Thumb Code    44  malloc.o(i.mem_perused)
+    myfree                                   0x08001075   Thumb Code    24  malloc.o(i.myfree)
+    mymalloc                                 0x08001091   Thumb Code    28  malloc.o(i.mymalloc)
+    mymemset                                 0x080010b1   Thumb Code    20  malloc.o(i.mymemset)
+    IAP_Version                              0x080010c4   Data          18  main.o(.constdata)
+    IAP_CompileTime                          0x080010d6   Data          24  main.o(.constdata)
+    Region$$Table$$Base                      0x080010f0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001110   Number         0  anon$$obj.o(Region$$Table)
     p_Flash_Write                            0x20000004   Data           4  main.o(.data)
     p_Flash_Read                             0x20000008   Data           4  main.o(.data)
     user_main                                0x2000000c   Data           4  main.o(.data)
@@ -748,9 +749,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000010f8, Max: 0x00002800, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x0000112c, Max: 0x00004000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x000010dc, Max: 0x00002800, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00001110, Max: 0x00004000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -858,20 +859,20 @@ Memory Map of the image
     0x08000cac   0x00000026   Code   RO            1    i.cmd_flash_read    main.o
     0x08000cd2   0x00000026   Code   RO            2    i.cmd_flash_write   main.o
     0x08000cf8   0x00000038   Code   RO            3    i.jump_app          main.o
-    0x08000d30   0x0000010c   Code   RO            4    i.main              main.o
-    0x08000e3c   0x00000058   Code   RO          799    i.mem_free          malloc.o
-    0x08000e94   0x000000e0   Code   RO          800    i.mem_init          malloc.o
-    0x08000f74   0x00000098   Code   RO          801    i.mem_malloc        malloc.o
-    0x0800100c   0x00000034   Code   RO          802    i.mem_perused       malloc.o
-    0x08001040   0x0000001c   Code   RO          803    i.myfree            malloc.o
-    0x0800105c   0x00000020   Code   RO          804    i.mymalloc          malloc.o
-    0x0800107c   0x00000014   Code   RO          806    i.mymemset          malloc.o
-    0x08001090   0x0000002a   Data   RO            5    .constdata          main.o
-    0x080010ba   0x00000002   PAD
-    0x080010bc   0x00000020   Data   RO         1197    Region$$Table       anon$$obj.o
+    0x08000d30   0x00000140   Code   RO            4    i.main              main.o
+    0x08000e70   0x00000058   Code   RO          799    i.mem_free          malloc.o
+    0x08000ec8   0x000000e0   Code   RO          800    i.mem_init          malloc.o
+    0x08000fa8   0x00000098   Code   RO          801    i.mem_malloc        malloc.o
+    0x08001040   0x00000034   Code   RO          802    i.mem_perused       malloc.o
+    0x08001074   0x0000001c   Code   RO          803    i.myfree            malloc.o
+    0x08001090   0x00000020   Code   RO          804    i.mymalloc          malloc.o
+    0x080010b0   0x00000014   Code   RO          806    i.mymemset          malloc.o
+    0x080010c4   0x0000002a   Data   RO            5    .constdata          main.o
+    0x080010ee   0x00000002   PAD
+    0x080010f0   0x00000020   Data   RO         1197    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Base: 0x20000004, Size: 0x00001494, Max: 0x00002800, ABSOLUTE)
+    Execution Region RW_IRAM1 (Base: 0x20000004, Size: 0x00001494, Max: 0x00002000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -896,7 +897,7 @@ Image component sizes
 
         32          0          0          0          0        548   core_cm3.o
        848         66          0          2          0       7145   flash.o
-       400         52         42         12          0     225324   main.o
+       452         62         42         12          0     224208   main.o
        596         74          0         12         20       5563   malloc.o
         20         10          0          0          0        475   misc.o
         60         22        236          0       1024        780   startup_stm32f10x_md.o
@@ -908,7 +909,7 @@ Image component sizes
        328         28          0          0          0       1793   system_stm32f10x.o
 
     ----------------------------------------------------------------------
-      3654        312        312         28       5140     270874   Object Totals
+      3706        322        312         28       5140     269758   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          8          0          2          2          0          0   (incl. Padding)
 
@@ -958,15 +959,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4004        328        312         28       5240     268874   Grand Totals
-      4004        328        312         28       5240     268874   ELF Image Totals
-      4004        328        312         28          0          0   ROM Totals
+      4056        338        312         28       5240     267758   Grand Totals
+      4056        338        312         28       5240     267758   ELF Image Totals
+      4056        338        312         28          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 4316 (   4.21kB)
+    Total RO  Size (Code + RO Data)                 4368 (   4.27kB)
     Total RW  Size (RW Data + ZI Data)              5268 (   5.14kB)
-    Total ROM Size (Code + RO Data + RW Data)       4344 (   4.24kB)
+    Total ROM Size (Code + RO Data + RW Data)       4396 (   4.29kB)
 
 ==============================================================================
 

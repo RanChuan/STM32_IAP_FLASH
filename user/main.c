@@ -7,7 +7,7 @@
 
 
 
-const char IAP_Version[]="IAP BY FLASH V1.1";
+const char IAP_Version[]="IAP BY FLASH V1.2";
 const char IAP_CompileTime[]=__DATE__ " -- " __TIME__;
 
 
@@ -49,9 +49,34 @@ void (*p_Flash_Read)(u8 *buff,u32 addr,u16 length);
 
 
 
+//定义用户程序的起始地址
+void (*user_main)(void);
+
+
+void jump_app(void)
+{
+	if(((*(vu32*)0x8002800)&0x2FFE0000)==0x20000000)	//检查栈顶地址是否合法.
+	{
+		//NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x2800);		
+		user_main=(void (*)(void))*(vu32*)(0x8002800+4);		//用户代码区第二个字为程序开始地址(复位地址)		
+		__set_MSP(*(vu32*)0x8002800);					//初始化APP堆栈指针(用户代码区的第一个字用于存放栈顶地址)
+		user_main();									//跳转到APP.
+	}
+	
+}
+
+
 
 int main()
 {
+	
+	if (IAP_CMD==IAP_CMD_ENTERISP)//需要复位到ISP
+	{
+		IAP_CMD=0;
+		__set_MSP(0x200001fc);
+		user_main=(void (*)(void))*(vu32*)(0x1ffff000+4);		//用户代码区第二个字为程序开始地址(复位地址)		
+		user_main();									//跳转到ISP.
+	}
 	SHCSR|=7<<16;
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);// 设置中断优先级分组2
 
@@ -119,21 +144,6 @@ int main()
 
 
 
-//定义用户程序的起始地址
-void (*user_main)(void);
-
-
-void jump_app(void)
-{
-	if(((*(vu32*)0x8002800)&0x2FFE0000)==0x20000000)	//检查栈顶地址是否合法.
-	{
-		//NVIC_SetVectorTable(NVIC_VectTab_FLASH, 0x2800);		
-		user_main=(void (*)(void))*(vu32*)(0x8002800+4);		//用户代码区第二个字为程序开始地址(复位地址)		
-		__set_MSP(*(vu32*)0x8002800);					//初始化APP堆栈指针(用户代码区的第一个字用于存放栈顶地址)
-		user_main();									//跳转到APP.
-	}
-	
-}
 
 
 
